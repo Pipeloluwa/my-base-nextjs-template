@@ -14,7 +14,6 @@ const NavBarComponent = () => {
 
     const navBgState = useSelector((state: RootState) => state.navBgState.value);
     const navValue = useSelector((state: RootState) => state.navValue.value);
-    const [navValueLocal, setNavBgTypeLocal] = useState(navValue)
 
     const navItemValues = {
         "firstSegment": ["Home", "About", "Contact", "Services"],
@@ -35,9 +34,6 @@ const NavBarComponent = () => {
         document.body.style.overflow = "unset";
     }
 
-    useEffect(() => {
-        setNavBgTypeLocal(navValue)
-    }, [navValue])
 
 
 
@@ -84,10 +80,11 @@ const NavBarComponent = () => {
                                     {
                                         navItemValues.firstSegment.map((item, index) =>
 
-                                            <Link href={`${rootUrl}`}
+                                            <Link
+                                                href={`/${item === "Home" ? "" : item.toLowerCase()}`}
                                                 onClick={closeDrawer_}
                                                 key={`navItemValueMobile${index}`}
-                                                className={`cursor-pointer ${navValueLocal === item ? 'bg-white shadow-gray-500 text-orange-600' : ''} p-2 px-4 ml-2 transition-colors duration-300 ease-linear rounded-2xl`}>
+                                                className={`cursor-pointer ${navValue === item ? 'bg-white shadow-gray-500 text-orange-600' : ''} p-2 px-4 ml-2 transition-colors duration-300 ease-linear rounded-2xl`}>
                                                 {item}
                                             </Link>
                                         )
@@ -132,8 +129,8 @@ const NavBarComponent = () => {
                         navItemValues.firstSegment.map((item, index) =>
                             <Link
                                 key={`navItemValueLarge${index}`}
-                                href={`${rootUrl}`}
-                                className={`cursor-pointer ${navValueLocal === 'Home' ? 'bg-white shadow-gray-500 text-orange-600' : ''} hover:bg-orange-400 hover:text-white py-2 px-4 rounded-2xl transition-colors duration-300 ease-linear`}>
+                                 href={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                                className={`cursor-pointer ${navValue === item ? 'bg-white shadow-gray-500 text-orange-600' : ''} hover:bg-orange-400 hover:text-white py-2 px-4 rounded-2xl transition-colors duration-300 ease-linear`}>
                                 {item}
                             </Link>
                         )
@@ -151,7 +148,7 @@ const NavBarComponent = () => {
                         navItemValues.secondSegment.map((item, index) =>
                             <Link
                                 key={`navItemValueLarge${index}`}
-                                href={`${rootUrl}`}
+                                href={`/${item === "Home" ? "" : item.toLowerCase()}`}
                                 className={` cursor-pointer border-2 text-white border-white bg-transparent h-10 min-w-[150px] flex justify-center items-center rounded-lg text-center shadow-sm shadow-gray-700`}>
                                 {item}
                             </Link>
